@@ -72,16 +72,25 @@ export default function ContactForm({ nonce }: { nonce?: string }) {
     }
   }
 
+  if (!SITE_KEY) {
+    return (
+      <div className="form">
+        <p className="notice info" role="status">
+          The contact form is temporarily unavailable. Please email me directly at{" "}
+          <a href="mailto:tk44211@gmail.com">tk44211@gmail.com</a>.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form className="form" onSubmit={onSubmit} noValidate>
-      {SITE_KEY && (
-        <Script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-          strategy="afterInteractive"
-          nonce={nonce}
-          onLoad={renderWidget}
-        />
-      )}
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        nonce={nonce}
+        onLoad={renderWidget}
+      />
       <div className="field">
         <label htmlFor="cf-name">Name</label>
         <input id="cf-name" name="name" autoComplete="name" maxLength={100} required />
@@ -100,7 +109,7 @@ export default function ContactForm({ nonce }: { nonce?: string }) {
         <label htmlFor="cf-website">Leave this empty</label>
         <input id="cf-website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
-      {SITE_KEY && <div ref={boxRef} />}
+      <div ref={boxRef} />
       {state.kind === "ok" && <p className="notice ok" role="status">Message sent. I will reply to your email soon.</p>}
       {state.kind === "err" && <p className="notice err" role="alert">{state.text}</p>}
       <div>

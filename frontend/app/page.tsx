@@ -90,7 +90,7 @@ export default async function Home() {
             <div className="contact-grid">
               <ContactForm nonce={nonce} />
               <div className="rows">
-                <div className="row"><span className="k">Email</span><span className="v">tk44211@gmail.com</span></div>
+                <div className="row"><span className="k">Email</span><span className="v"><a href="mailto:tk44211@gmail.com">tk44211@gmail.com</a></span></div>
                 <div className="row"><span className="k">GitHub</span><span className="v"><a href="https://github.com/Hamza313-cyber" target="_blank" rel="noopener noreferrer">github.com/Hamza313-cyber</a></span></div>
                 <div className="row"><span className="k">Fiverr</span><span className="v soon">Coming soon</span></div>
                 <div className="row"><span className="k">LinkedIn</span><span className="v soon">Coming soon</span></div>

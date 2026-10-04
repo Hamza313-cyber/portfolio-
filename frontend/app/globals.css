@@ -88,6 +88,7 @@ h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 4.4vw
 .notice { font-size: 15px; padding: 10px 12px; border: 1px solid; }
 .notice.ok { color: var(--ok); border-color: rgba(159,224,168,.4); }
 .notice.err { color: var(--danger); border-color: rgba(255,138,122,.4); }
+.notice.info { color: var(--ink); border-color: var(--line); }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .rows { display: grid; gap: 12px; }
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; background: var(--panel); border: 1px solid var(--line); padding: 14px 16px; }
