@@ -56,7 +56,9 @@ Tests: `cd backend && pytest`
    (Authentication → Sign In / Providers), and create your admin user. Copy its user id. Add a read policy
    that allows `anon` and `authenticated` users to select only rows where `projects.is_published = true`.
 2. **Cloudflare Turnstile**: create a widget for your domain and copy the site key and secret key.
-3. **Vercel**: import this repository, then add the variables from `.env.example`.
+3. **Vercel**: import this repository, then add the variables from `.env.example`. Use
+   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` for the public Turnstile site key and `TURNSTILE_SECRET_KEY` for the
+   server-only secret key.
 4. Deploy, open the site, send a test message, and check it appears in `/admin`.
 
 **Keep-alive**: Supabase free projects pause after a week of low activity. `vercel.json` schedules a daily
