@@ -11,6 +11,7 @@ import httpx
 
 
 class Repo(Protocol):
+    async def ping(self) -> None: ...
     async def list_projects(self, published_only: bool) -> list[dict]: ...
     async def create_project(self, row: dict) -> dict: ...
     async def update_project(self, project_id: str, row: dict) -> dict | None: ...
@@ -41,6 +42,10 @@ class SupabaseRepo:
         if resp.status_code >= 400:
             raise DatabaseError(f"supabase {method} {table} -> {resp.status_code}: {resp.text[:300]}")
         return resp
+
+    async def ping(self) -> None:
+        # Smallest possible real query: one id from one row. Read-only.
+        await self._request("GET", "projects", params={"select": "id", "limit": "1"})
 
     async def list_projects(self, published_only: bool) -> list[dict]:
         params = {"select": "*", "order": "sort_order.asc,created_at.asc"}
@@ -96,6 +101,9 @@ class MemoryRepo:
         for i, p in enumerate(seed_projects or []):
             self.projects.append({**p, "id": str(uuid.uuid4()), "sort_order": p.get("sort_order", i),
                                   "created_at": datetime.now(timezone.utc).isoformat()})
+
+    async def ping(self) -> None:
+        self.pings = getattr(self, "pings", 0) + 1
 
     async def list_projects(self, published_only: bool) -> list[dict]:
         items = [p for p in self.projects if p.get("is_published", True) or not published_only]

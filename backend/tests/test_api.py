@@ -14,7 +14,7 @@ GOOD = {"name": "Ayesha", "email": "ayesha@example.com", "message": "I need an n
 def make_client(**overrides) -> tuple[TestClient, MemoryRepo]:
     repo = MemoryRepo(DEFAULT_PROJECTS)
     base = dict(supabase_url="", supabase_secret_key="", supabase_publishable_key="",
-                admin_user_ids=[], allowed_origins=[ORIGIN], turnstile_secret="", ip_salt="test-salt",
+                admin_user_ids=[], allowed_origins=[ORIGIN], turnstile_secret="", cron_secret="", ip_salt="test-salt",
                 rate_limit_count=3, rate_limit_minutes=15, environment="development")
     base.update(overrides)
     settings = Settings(**base)
@@ -142,3 +142,20 @@ def test_admin_rejects_bad_project_urls():
     h = {"authorization": "Bearer dev-admin", "origin": ORIGIN}
     bad = {"title": "X project", "description": "Something here.", "live_url": "javascript:alert(1)"}
     assert client.post("/api/admin/projects", json=bad, headers=h).status_code == 422
+
+
+def test_keepalive_needs_cron_secret():
+    client, repo = make_client()  # no CRON_SECRET configured: always refused
+    assert client.get("/api/keepalive", headers={"authorization": "Bearer anything"}).status_code == 401
+    client, repo = make_client(cron_secret="s3cret-value-1234")
+    assert client.get("/api/keepalive").status_code == 401
+    assert client.get("/api/keepalive", headers={"authorization": "Bearer wrong"}).status_code == 401
+    assert getattr(repo, "pings", 0) == 0
+
+
+def test_keepalive_pings_database():
+    client, repo = make_client(cron_secret="s3cret-value-1234")
+    r = client.get("/api/keepalive", headers={"authorization": "Bearer s3cret-value-1234"})
+    assert r.status_code == 200 and r.json()["ok"] is True
+    assert r.headers["cache-control"] == "no-store"
+    assert repo.pings == 1

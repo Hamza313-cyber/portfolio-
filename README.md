@@ -58,5 +58,6 @@ Tests: `cd backend && pytest`
 3. **Vercel**: import this repository, then add the variables from `.env.example`.
 4. Deploy, open the site, send a test message, and check it appears in `/admin`.
 
-Supabase free projects pause after a week of low activity; restore them from the Supabase dashboard
-or add a scheduled keep-alive.
+**Keep-alive**: Supabase free projects pause after a week of low activity. `vercel.json` schedules a daily
+Vercel Cron call to `/api/keepalive` (09:00 IST give or take an hour on the Hobby plan), which reads one row
+from the database. Set `CRON_SECRET` in Vercel; requests without it are refused.

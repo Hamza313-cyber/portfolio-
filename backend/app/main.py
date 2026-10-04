@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hmac
 import logging
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -80,6 +81,20 @@ public = APIRouter(prefix="/api")
 @public.get("/health")
 async def health():
     return {"ok": True}
+
+
+@public.get("/keepalive")
+async def keepalive(request: Request, response: Response, repo: Repo = Depends(get_repo),
+                    settings: Settings = Depends(get_settings)):
+    """Called once a day by Vercel Cron so the free Supabase project never looks idle.
+    Only callers that send the CRON_SECRET password get through."""
+    response.headers["Cache-Control"] = "no-store"
+    expected = f"Bearer {settings.cron_secret}"
+    given = request.headers.get("authorization", "")
+    if not settings.cron_secret or not hmac.compare_digest(given.encode(), expected.encode()):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not allowed.")
+    await repo.ping()
+    return {"ok": True, "at": datetime.now(timezone.utc).isoformat()}
 
 
 @public.get("/projects", response_model=list[Project])

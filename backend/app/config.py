@@ -25,6 +25,9 @@ class Settings:
     # Cloudflare Turnstile. When empty, the CAPTCHA check is skipped (local development only).
     turnstile_secret: str = field(default_factory=lambda: os.getenv("TURNSTILE_SECRET_KEY", ""))
 
+    # Password Vercel Cron sends as "Authorization: Bearer <secret>" to /api/keepalive.
+    cron_secret: str = field(default_factory=lambda: os.getenv("CRON_SECRET", ""))
+
     # Salt for hashing visitor IPs, so raw IPs are never stored.
     ip_salt: str = field(default_factory=lambda: os.getenv("IP_HASH_SALT", ""))
 
