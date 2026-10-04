@@ -19,21 +19,15 @@ export const FALLBACK_PROJECTS: Project[] = [
     code_url: "https://github.com/Hamza313-cyber/sky-computer-and-robotics", status: "live", sort_order: 0, is_published: true,
   },
   {
-    id: "pulsewise", title: "PulseWise",
-    description: "Medical calculator app with 19 calculators. Installs on a phone like an app.",
-    tags: ["React", "PWA"], live_url: "https://medical-calculator-topaz.vercel.app",
-    code_url: "https://github.com/Hamza313-cyber/Calculator-", status: "live", sort_order: 1, is_published: true,
+    id: "bill-scanner", title: "Bill Scanner",
+    description: "Snap a photo of a supplier bill and AI reads every line item: product, batch, expiry, quantity, rate and GST. Review, save and export to Excel.",
+    tags: ["Python", "Gemini AI", "Supabase"], live_url: null,
+    code_url: "https://github.com/Hamza313-cyber/bill-scanner", status: "live", sort_order: 1, is_published: true,
   },
   {
-    id: "aeos", title: "AEOS",
-    description: "AI operating-system dashboard for organising content and work.",
-    tags: ["TypeScript", "Vite"], live_url: "https://aeos-six.vercel.app",
-    code_url: "https://github.com/Hamza313-cyber/AEOS", status: "live", sort_order: 2, is_published: true,
-  },
-  {
-    id: "cryptotrack", title: "CryptoTrack",
-    description: "Crypto price tracker with live market data.",
-    tags: ["React", "Supabase"], live_url: null, code_url: null, status: "in_progress", sort_order: 3, is_published: true,
+    id: "sana", title: "Sana Heritage Couture",
+    description: "Online store website for a ladies' clothing and jewellery brand.",
+    tags: ["Website", "Supabase"], live_url: null, code_url: null, status: "in_progress", sort_order: 2, is_published: true,
   },
 ];
 

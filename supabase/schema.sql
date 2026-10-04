@@ -68,18 +68,16 @@ select * from (values
    'Website and product catalogue for a tech store, with an admin panel to add products and manage enquiries.',
    array['Next.js','Supabase','Tailwind'], null,
    'https://github.com/Hamza313-cyber/sky-computer-and-robotics', 'live', 0),
-  ('PulseWise', 'Medical calculator app with 19 calculators. Installs on a phone like an app.',
-   array['React','PWA'], 'https://medical-calculator-topaz.vercel.app',
-   'https://github.com/Hamza313-cyber/Calculator-', 'live', 1),
-  ('AEOS', 'AI operating-system dashboard for organising content and work.',
-   array['TypeScript','Vite'], 'https://aeos-six.vercel.app',
-   'https://github.com/Hamza313-cyber/AEOS', 'live', 2),
-  ('CryptoTrack', 'Crypto price tracker with live market data.',
-   array['React','Supabase'], null, null, 'in_progress', 3)
+  ('Bill Scanner',
+   'Snap a photo of a supplier bill and AI reads every line item: product, batch, expiry, quantity, rate and GST. Review, save and export to Excel.',
+   array['Python','Gemini AI','Supabase'], null,
+   'https://github.com/Hamza313-cyber/bill-scanner', 'live', 1),
+  ('Sana Heritage Couture', 'Online store website for a ladies'' clothing and jewellery brand.',
+   array['Website','Supabase'], null, null, 'in_progress', 2)
 ) as seed(title, description, tags, live_url, code_url, status, sort_order)
 where not exists (select 1 from public.projects);
 
 -- ---------- checks to run after this script ----------
 -- select relname, relrowsecurity, relforcerowsecurity from pg_class
 --   where relname in ('projects', 'messages');          -- both columns must be true
--- select count(*) from public.projects;                 -- 4
+-- select count(*) from public.projects;                 -- 3
