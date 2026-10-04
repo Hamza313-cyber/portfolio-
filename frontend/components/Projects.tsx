@@ -25,10 +25,11 @@ export default function Projects() {
         const live = safeUrl(p.live_url);
         const code = safeUrl(p.code_url);
         return (
-          <article className="card" key={p.id}>
-            {p.status === "in_progress" && <span className="status">In progress</span>}
+          <article className="card project-card" key={p.id}>
+            {p.status === "in_progress" ? <span className="status">In progress</span> : <span className="project-label">Featured work</span>}
             <h3>{p.title}</h3>
             <p>{p.description}</p>
+            <div className="project-meta"><span>Built with</span><span>{p.tags.slice(0, 3).join(" · ") || "Custom stack"}</span></div>
             {p.tags.length > 0 && (
               <div className="tags">
                 {p.tags.map((t) => (
