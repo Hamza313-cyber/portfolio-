@@ -55,6 +55,7 @@ export default async function Home() {
           <p className="lead">I build software for real business problems: automations that remove repetitive work, Excel reports that update themselves, and fast websites and web apps.</p>
           <p className="lead muted">I work with modern tools and AI-assisted development to ship quickly while keeping the important parts reliable, secure and maintainable. I am open to freelance work with clients worldwide.</p>
           <div className="mini-stats" aria-label="What I focus on"><div><strong>Automation</strong><span>Reduce repetitive work</span></div><div><strong>Web</strong><span>Fast, responsive experiences</span></div><div><strong>AI</strong><span>Useful business workflows</span></div></div>
+          <div className="trust-strip" aria-label="Why work with me"><div><strong>Practical first</strong><span>Built around your actual workflow</span></div><div><strong>Mobile ready</strong><span>Designed for phones and desktops</span></div><div><strong>Built to grow</strong><span>Easy to improve as your needs change</span></div></div>
         </div></section>
 
         <section className="block" id="services"><div className="wrap">
@@ -74,7 +75,9 @@ export default async function Home() {
 
         <section className="block" id="projects"><div className="wrap">
           <p className="eyebrow"><i />Work</p><h2>Featured Projects</h2>
-          <p className="lead muted">A selection of software and business projects. More projects can be added and managed from the admin panel.</p><Projects />
+          <p className="lead muted">A selection of software and business projects. More projects can be added and managed from the admin panel.</p>
+          <div className="project-cta"><span>Have a similar idea?</span><a className="btn ghost" href="#contact">Let's build it</a></div>
+          <Projects />
         </div></section>
 
         <section className="block" id="stack"><div className="wrap">
