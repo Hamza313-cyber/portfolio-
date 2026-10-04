@@ -22,7 +22,7 @@ export default function Projects() {
 
   const visible = projects.filter((p) => {
     if (filter === "In progress") return p.status === "in_progress";
-    if (filter === "AI & automation") return p.tags.some((tag) => /ai|python|n8n|automation/i.test(tag));
+    if (filter === "AI & automation") return p.tags.some((tag) => /\bai\b|python|n8n|automation/i.test(tag));
     if (filter === "Websites") return p.tags.some((tag) => /next|react|website|tailwind/i.test(tag));
     return true;
   });
@@ -32,7 +32,7 @@ export default function Projects() {
     <div className="project-filters" role="group" aria-label="Filter projects">
       {["All projects", "Websites", "AI & automation", "In progress"].map((label) => <button type="button" key={label} aria-pressed={filter === label} onClick={() => setFilter(label)}>{label}</button>)}
     </div>
-    <p className="sr-only" role="status">{visible.length} projects shown</p>
+    <p className="sr-only" role="status">{visible.length} {visible.length === 1 ? "project" : "projects"} shown</p>
     <div className="grid project-grid">
       {visible.map((p) => {
         const live = safeUrl(p.live_url);
