@@ -14,9 +14,20 @@ const PROCESS = [
 
 export default async function Home() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Tabish Ali Khan",
+    jobTitle: "AI Automation Developer",
+    url: "https://tabish-portfolio-xi.vercel.app",
+    email: "mailto:tk44211@gmail.com",
+    sameAs: ["https://github.com/Hamza313-cyber"],
+    knowsAbout: ["AI automation", "n8n", "Python", "Next.js", "FastAPI", "Business automation"],
+  };
 
   return (
     <>
+      <script nonce={nonce} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <header className="site-header">
         <nav className="wrap nav" aria-label="Main navigation">
           <a className="sig" href="#top">Tabish Ali Khan</a>
