@@ -5,6 +5,7 @@ import { FALLBACK_PROJECTS, safeUrl, type Project } from "@/lib/projects";
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>(FALLBACK_PROJECTS);
+  const [filter, setFilter] = useState("All projects");
 
   useEffect(() => {
     const ctrl = new AbortController();
@@ -19,13 +20,26 @@ export default function Projects() {
     return () => ctrl.abort();
   }, []);
 
+  const visible = projects.filter((p) => {
+    if (filter === "In progress") return p.status === "in_progress";
+    if (filter === "AI & automation") return p.tags.some((tag) => /ai|python|n8n|automation/i.test(tag));
+    if (filter === "Websites") return p.tags.some((tag) => /next|react|website|tailwind/i.test(tag));
+    return true;
+  });
+
   return (
-    <div className="grid">
-      {projects.map((p) => {
+    <>
+    <div className="project-filters" role="group" aria-label="Filter projects">
+      {["All projects", "Websites", "AI & automation", "In progress"].map((label) => <button type="button" key={label} aria-pressed={filter === label} onClick={() => setFilter(label)}>{label}</button>)}
+    </div>
+    <p className="sr-only" role="status">{visible.length} projects shown</p>
+    <div className="grid project-grid">
+      {visible.map((p) => {
         const live = safeUrl(p.live_url);
         const code = safeUrl(p.code_url);
         return (
           <article className="card project-card" key={p.id}>
+            <div className="project-index" aria-hidden="true">{String(projects.indexOf(p) + 1).padStart(2, "0")}<span>↗</span></div>
             {p.status === "in_progress" ? <span className="status">In progress</span> : <span className="project-label">Featured work</span>}
             <h3>{p.title}</h3>
             <p>{p.description}</p>
@@ -39,13 +53,15 @@ export default function Projects() {
             )}
             {(live || code) && (
               <div className="links">
-                {live && <a href={live} target="_blank" rel="noopener noreferrer">Live</a>}
-                {code && <a href={code} target="_blank" rel="noopener noreferrer">Code</a>}
+                {live && <a href={live} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title} live`}>View live <span aria-hidden="true">↗</span></a>}
+                {code && <a href={code} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title} source code`}>Source code <span aria-hidden="true">↗</span></a>}
               </div>
             )}
           </article>
         );
       })}
+      {!visible.length && <p className="project-empty">No projects in this category yet.</p>}
     </div>
+    </>
   );
 }

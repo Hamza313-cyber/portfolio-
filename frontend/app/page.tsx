@@ -30,7 +30,7 @@ export default async function Home() {
       <script nonce={nonce} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <header className="site-header">
         <nav className="wrap nav" aria-label="Main navigation">
-          <a className="sig" href="#top">Tabish Ali Khan</a>
+          <a className="sig" href="#top"><span className="brand-mark" aria-hidden="true">TK.</span>Tabish Ali Khan</a>
           <ul>
             <li><a href="#about">About</a></li><li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li><li><a href="#projects">Projects</a></li>
@@ -40,18 +40,19 @@ export default async function Home() {
       </header>
 
       <main id="top">
-        <section className="wrap hero" aria-labelledby="hero-title">
+        <section className="hero-band" aria-labelledby="hero-title"><div className="wrap hero">
+          <div className="hero-topline"><span>Independent developer</span><span>Automation / Web / AI</span></div>
           <p className="hello">Assalamu Alaikum</p>
           <h1 id="hero-title">Tabish Ali Khan</h1>
-          <div className="rule" aria-hidden="true"><i /><b /></div>
           <p className="role">AI Automation Developer</p>
           <Typing />
           <p className="hero-copy">I build practical automations, business websites, web apps and AI-powered tools that solve real problems.</p>
-          <div className="cta"><a className="btn solid" href="#projects">See my work</a><a className="btn ghost" href="#contact">Start a project</a></div>
-        </section>
+          <div className="cta"><a className="btn solid" href="#projects">Explore my work <span aria-hidden="true">↗</span></a><a className="btn ghost" href="#contact">Let&apos;s talk <span aria-hidden="true">↗</span></a></div>
+          <div className="hero-bottom"><span>Practical ideas. Thoughtful execution.</span><a href="#about">Discover more <span aria-hidden="true">↓</span></a></div>
+        </div></section>
 
         <section className="block" id="about"><div className="wrap">
-          <p className="eyebrow"><i />About</p><h2>Building useful software, not just demos.</h2>
+          <p className="eyebrow"><i />01 / About me</p><h2>Less busywork.<br />More possibility.</h2>
           <p className="lead">I build software for real business problems: automations that remove repetitive work, Excel reports that update themselves, and fast websites and web apps.</p>
           <p className="lead muted">I work with modern tools and AI-assisted development to ship quickly while keeping the important parts reliable, secure and maintainable. I am open to freelance work with clients worldwide.</p>
           <div className="mini-stats" aria-label="What I focus on"><div><strong>Automation</strong><span>Reduce repetitive work</span></div><div><strong>Web</strong><span>Fast, responsive experiences</span></div><div><strong>AI</strong><span>Useful business workflows</span></div></div>
@@ -59,7 +60,7 @@ export default async function Home() {
         </div></section>
 
         <section className="block" id="services"><div className="wrap">
-          <p className="eyebrow"><i />Services</p><h2>What I Can Build For You</h2>
+          <p className="eyebrow"><i />02 / What I do</p><h2>Built around your business.</h2>
           <div className="grid">
             <article className="card"><span className="card-number">01</span><h3>Automation</h3><p>n8n workflows that move data, send alerts and handle routine tasks automatically.</p></article>
             <article className="card"><span className="card-number">02</span><h3>Excel & Reports</h3><p>Reports and dashboards that bring the numbers together without repetitive copy-paste work.</p></article>
@@ -69,24 +70,23 @@ export default async function Home() {
         </div></section>
 
         <section className="block" id="process"><div className="wrap">
-          <p className="eyebrow"><i />Process</p><h2>From idea to working product.</h2>
+          <p className="eyebrow"><i />03 / The process</p><h2>A clear path from idea to launch.</h2>
           <div className="process-grid">{PROCESS.map(([number, title, text]) => <article className="process-card" key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div></section>
 
         <section className="block" id="projects"><div className="wrap">
-          <p className="eyebrow"><i />Work</p><h2>Featured Projects</h2>
-          <p className="lead muted">A selection of software and business projects. More projects can be added and managed from the admin panel.</p>
-          <div className="project-cta"><span>Have a similar idea?</span><a className="btn ghost" href="#contact">Let's build it</a></div>
+          <div className="section-heading"><div><p className="eyebrow"><i />04 / Selected work</p><h2>Ideas put to work.</h2></div><a className="text-link" href="#contact">Build something with me <span aria-hidden="true">↗</span></a></div>
+          <p className="lead muted">Business websites, AI-powered tools and projects in the making.</p>
           <Projects />
         </div></section>
 
         <section className="block" id="stack"><div className="wrap">
-          <p className="eyebrow"><i />Tools</p><h2>Tech Stack</h2>
+          <p className="eyebrow"><i />05 / My toolkit</p><h2>The right tools for the job.</h2>
           <div className="stack">{STACK.map((s) => <span key={s}>{s}</span>)}</div>
         </div></section>
 
         <section className="block contact-section" id="contact"><div className="wrap">
-          <p className="eyebrow"><i />Contact</p><h2>Have a problem worth solving?</h2>
+          <p className="eyebrow"><i />06 / Let&apos;s connect</p><h2>Your next idea<br />starts here.</h2>
           <p className="lead muted">Tell me what you want to automate or build, and I will reply with a practical plan.</p>
           <div className="contact-grid"><ContactForm nonce={nonce} /><div className="rows">
             <div className="row"><span className="k">Email</span><span className="v"><a href="mailto:tk44211@gmail.com">tk44211@gmail.com</a></span></div>

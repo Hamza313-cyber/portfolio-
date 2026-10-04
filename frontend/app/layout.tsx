@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 // Fonts are self-hosted from npm packages, so no request goes to an outside font server.
-import "@fontsource/cinzel/700.css";
 import "@fontsource/dm-sans/400.css";
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0b",
+  themeColor: "#101513",
   colorScheme: "dark",
 };
 
@@ -59,8 +58,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <div className="wall" aria-hidden="true" />
-        <div className="shade" aria-hidden="true" />
         {children}
       </body>
     </html>
