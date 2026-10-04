@@ -25,7 +25,7 @@ Both parts deploy as one Vercel project using [Vercel Services](https://vercel.c
 - **Rate limit**: 3 messages per visitor per 15 minutes (configurable); IPs are stored only as a keyed hash
 - **CSRF**: write requests must come from an allowed `Origin`; the admin API uses bearer tokens, not cookies
 - **Admin access**: token checked with Supabase Auth, then the user id must be in `ADMIN_USER_IDS`
-- **Database**: Row Level Security on every table with no public policies; only the server's secret key can reach the data
+- **Database**: Row Level Security on every table; published projects can be read publicly, while messages and admin writes stay server-only
 - **Headers**: per-request nonce Content-Security-Policy (`frontend/proxy.ts`), HSTS, `X-Frame-Options: DENY`, `nosniff`, strict referrer and permissions policies
 - **Fails closed**: in production, a missing CAPTCHA key, allowed-origin list or database config blocks requests instead of letting them through
 - API docs are disabled in production; error messages never echo user input or database details
@@ -53,7 +53,8 @@ Tests: `cd backend && pytest`
 ## Deploy
 
 1. **Supabase**: create a project, run `supabase/schema.sql` in the SQL Editor, turn off public sign-ups
-   (Authentication → Sign In / Providers), and create your admin user. Copy its user id.
+   (Authentication → Sign In / Providers), and create your admin user. Copy its user id. Add a read policy
+   that allows `anon` and `authenticated` users to select only rows where `projects.is_published = true`.
 2. **Cloudflare Turnstile**: create a widget for your domain and copy the site key and secret key.
 3. **Vercel**: import this repository, then add the variables from `.env.example`.
 4. Deploy, open the site, send a test message, and check it appears in `/admin`.
