@@ -36,7 +36,6 @@ export default function Projects() {
     <div className="grid project-grid">
       {visible.map((p) => {
         const live = safeUrl(p.live_url);
-        const code = safeUrl(p.code_url);
         return (
           <article className="card project-card" key={p.id}>
             <div className="project-index" aria-hidden="true">{String(projects.indexOf(p) + 1).padStart(2, "0")}<span>↗</span></div>
@@ -51,10 +50,9 @@ export default function Projects() {
                 ))}
               </div>
             )}
-            {(live || code) && (
+            {live && (
               <div className="links">
-                {live && <a href={live} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title} live`}>View live <span aria-hidden="true">↗</span></a>}
-                {code && <a href={code} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title} source code`}>Source code <span aria-hidden="true">↗</span></a>}
+                <a href={live} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title} live`}>View live <span aria-hidden="true">↗</span></a>
               </div>
             )}
           </article>
