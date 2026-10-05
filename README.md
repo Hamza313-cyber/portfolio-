@@ -60,7 +60,8 @@ Tests: `cd backend && pytest`
    `NEXT_PUBLIC_TURNSTILE_SITE_KEY` for the public Turnstile site key and `TURNSTILE_SECRET_KEY` for the
    server-only secret key.
 4. Set `ADMIN_USER_IDS` in Vercel to the comma-separated Supabase Auth user IDs allowed to use
-   the admin API. Use the user ID, not the email address; successful login alone does not grant admin access.
+   the admin API. Keep this allowlist configured when updating API keys; it is independent of those keys.
+   Use the user ID, not the email address; successful login alone does not grant admin access.
    Keep `SUPABASE_SECRET_KEY` server-only and use a privileged server key for private messages and admin writes.
 5. Deploy (or redeploy after changing environment variables), open the site, send a test message,
    and check it appears in `/admin`.
