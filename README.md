@@ -66,6 +66,10 @@ Tests: `cd backend && pytest`
 5. Deploy (or redeploy after changing environment variables), open the site, send a test message,
    and check it appears in `/admin`.
 
+If `/admin` reports "This account is not an admin", verify `ADMIN_USER_IDS` is present in the
+Production environment and includes the logged-in user's Supabase Auth ID, then redeploy.
+A database service error is a separate issue: verify the server key and private table access.
+
 **Keep-alive**: Supabase free projects pause after a week of low activity. `vercel.json` schedules a daily
 Vercel Cron call to `/api/keepalive` (09:00 IST give or take an hour on the Hobby plan), which reads one row
 from the database. Set `CRON_SECRET` in Vercel; requests without it are refused.
