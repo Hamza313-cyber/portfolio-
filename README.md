@@ -59,7 +59,11 @@ Tests: `cd backend && pytest`
 3. **Vercel**: import this repository, then add the variables from `.env.example`. Use
    `NEXT_PUBLIC_TURNSTILE_SITE_KEY` for the public Turnstile site key and `TURNSTILE_SECRET_KEY` for the
    server-only secret key.
-4. Deploy, open the site, send a test message, and check it appears in `/admin`.
+4. Set `ADMIN_USER_IDS` in Vercel to the comma-separated Supabase Auth user IDs allowed to use
+   the admin API. Use the user ID, not the email address; successful login alone does not grant admin access.
+   Keep `SUPABASE_SECRET_KEY` server-only and use a privileged server key for private messages and admin writes.
+5. Deploy (or redeploy after changing environment variables), open the site, send a test message,
+   and check it appears in `/admin`.
 
 **Keep-alive**: Supabase free projects pause after a week of low activity. `vercel.json` schedules a daily
 Vercel Cron call to `/api/keepalive` (09:00 IST give or take an hour on the Hobby plan), which reads one row
