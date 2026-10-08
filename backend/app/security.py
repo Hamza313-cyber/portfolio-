@@ -49,6 +49,8 @@ def check_origin(request: Request, settings: Settings = Depends(get_settings)) -
 async def verify_turnstile(token: str, ip: str, settings: Settings) -> bool:
     if not settings.turnstile_secret:
         # No CAPTCHA configured: allowed only in local development.
+        if settings.is_production:
+            log.error("turnstile: TURNSTILE_SECRET_KEY is not set in production")
         return not settings.is_production
     if not token:
         return False
@@ -58,7 +60,12 @@ async def verify_turnstile(token: str, ip: str, settings: Settings) -> bool:
                 "https://challenges.cloudflare.com/turnstile/v0/siteverify",
                 data={"secret": settings.turnstile_secret, "response": token, "remoteip": ip},
             )
-        return bool(resp.json().get("success"))
+        data = resp.json()
+        if not data.get("success"):
+            # Cloudflare's reason codes only; never the secret or the token.
+            log.warning("turnstile rejected: error-codes=%s hostname=%s",
+                        data.get("error-codes"), data.get("hostname"))
+        return bool(data.get("success"))
     except (httpx.HTTPError, ValueError):
         log.exception("turnstile verification failed")
         return False
