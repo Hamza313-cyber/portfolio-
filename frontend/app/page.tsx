@@ -19,7 +19,7 @@ export default async function Home() {
     "@type": "Person",
     name: "Tabish Ali Khan",
     jobTitle: "AI Automation Developer",
-    url: "https://tabish-portfolio-xi.vercel.app",
+    url: "https://tabishkhan313.vercel.app",
     email: "mailto:tk44211@gmail.com",
     sameAs: ["https://github.com/Hamza313-cyber"],
     knowsAbout: ["AI automation", "n8n", "Python", "Next.js", "FastAPI", "Business automation"],

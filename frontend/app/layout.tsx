@@ -7,7 +7,7 @@ import "@fontsource/great-vibes/400.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tabish-portfolio-xi.vercel.app"),
+  metadataBase: new URL("https://tabishkhan313.vercel.app"),
   title: {
     default: "Tabish Ali Khan | AI Automation Developer",
     template: "%s | Tabish Ali Khan",
