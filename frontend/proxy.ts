@@ -13,8 +13,8 @@ export function proxy(request: NextRequest) {
     style-src 'self'${isDev ? " 'unsafe-inline'" : ` 'nonce-${nonce}'`};
     img-src 'self' blob: data:;
     font-src 'self';
-    connect-src 'self' ${supabase} https://challenges.cloudflare.com;
-    frame-src https://challenges.cloudflare.com;
+    connect-src 'self' ${supabase};
+    frame-src 'none';
     object-src 'none';
     base-uri 'self';
     form-action 'self';

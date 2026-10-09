@@ -1,5 +1,4 @@
 import { headers } from "next/headers";
-import ContactForm from "@/components/ContactForm";
 import Projects from "@/components/Projects";
 import Typing from "@/components/Typing";
 
@@ -87,8 +86,8 @@ export default async function Home() {
 
         <section className="block contact-section" id="contact"><div className="wrap">
           <p className="eyebrow"><i />06 / Let&apos;s connect</p><h2>Your next idea<br />starts here.</h2>
-          <p className="lead muted">Tell me what you want to automate or build, and I will reply with a practical plan.</p>
-          <div className="contact-grid"><ContactForm nonce={nonce} /><div className="rows">
+          <p className="lead muted">Email me what you want to automate or build, and I will reply with a practical plan.</p>
+          <div className="contact-grid"><div><a className="btn solid" href="mailto:tk44211@gmail.com?subject=Project%20enquiry">Email me <span aria-hidden="true">↗</span></a></div><div className="rows">
             <div className="row"><span className="k">Email</span><span className="v"><a href="mailto:tk44211@gmail.com">tk44211@gmail.com</a></span></div>
             <div className="row"><span className="k">GitHub</span><span className="v"><a href="https://github.com/Hamza313-cyber" target="_blank" rel="noopener noreferrer">github.com/Hamza313-cyber</a></span></div>
             <div className="row"><span className="k">Work</span><span className="v">Freelance & worldwide projects</span></div>
